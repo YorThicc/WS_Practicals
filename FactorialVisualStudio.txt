@@ -1,0 +1,65 @@
+Factorial Visual Studio –
+WebForm1.aspx
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" 
+Inherits="Factorial.WebForm1" %> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head id="Head1" runat="server"> 
+<title></title> </head> <body> 
+<form id="form1" runat="server"> <div> 
+Enter number:&nbsp;&nbsp; 
+<asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+<asp:Button ID="Button1" runat="server" Text="check" OnClick="Button1_Click"/> <br /> 
+<asp:Label ID="Label1" runat="server"></asp:Label> 
+</div></form></body></html>
+
+Fact.asmx.cs –
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Services;
+
+namespace Factorial
+{
+    [WebService(Namespace = "http://tempuri.org/")]
+    [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
+    [System.ComponentModel.ToolboxItem(false)]
+    public class Fact : System.Web.Services.WebService
+    {
+        [WebMethod]
+        public int fact(int n)
+        {
+            int f = 1;
+            for (int i = 1; i <= n; i++ )
+            {
+                f = f * i;
+            } 
+            return f;
+        }
+    }
+}
+
+WebForm1.aspx.cs –
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace Factorial
+{
+    public partial class WebForm1 : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e) { }
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            Fact obj = new Fact();
+            int a = Convert.ToInt32(TextBox1.Text);
+            Label1.Text = obj.fact(a).ToString();
+        }
+    }
+}
+

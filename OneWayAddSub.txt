@@ -1,0 +1,42 @@
+OneWayAddSub in Visual Studio –
+EXE – WcfTestClient.exe
+IService1.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.ServiceModel;
+using System.Text;
+namespace OneWayAddSub
+{
+[ServiceContract]
+public interface IService1 {
+    [OperationContract(IsOneWay = true)]
+    void Addition(int a, int b);
+    [OperationContract(IsOneWay = true)]
+    void Substraction(int a, int b);
+}
+}
+
+Service1.svc.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.ServiceModel;
+using System.Text;
+namespace OneWayAddSub
+{
+    public class Service1 : IService1
+    {
+        public void Addition(int a, int b)
+        {
+            Console.WriteLine(a + b);
+        }
+        public void Substraction(int a, int b)
+        {
+            Console.WriteLine(a - b);
+        }
+    }
+}
+

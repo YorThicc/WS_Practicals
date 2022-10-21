@@ -1,0 +1,56 @@
+PositiveNegative in NetBeans –
+Index.jsp
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+        <form action="index.jsp">Enter Number:<input type="text" name="txt1"><br>
+<input type="submit" value="check"></form> 
+   
+    <%-- start web service invocation --%><hr/>
+    <%
+    try {
+	pkgPosNegWS.NewWebService_Service service = new pkgPosNegWS.NewWebService_Service();
+	pkgPosNegWS.NewWebService port = service.getNewWebServicePort();
+	 // TODO initialize WS operation arguments here
+	int number1 = 0;
+	// TODO process result here
+	java.lang.String result = port.newWebService(number1);
+	out.println("Result = "+result);
+    } catch (Exception ex) {
+	// TODO handle custom exceptions here
+    }
+    %>
+    <%-- end web service invocation --%><hr/>
+    </body>
+</html>
+NewWebService.java
+package pkgPosNeg;
+
+import javax.jws.WebService;
+import javax.jws.WebMethod;
+import javax.jws.WebParam;
+
+/**
+ *
+ * @author Shreyas
+ */
+@WebService(serviceName = "NewWebService")
+public class NewWebService {
+    @WebMethod(operationName="NewWebService")
+    public String NewWebService(@WebParam(name="number1") int num)
+    {
+        if (num>0)
+        {
+            return "Number is positive";
+        }
+        else
+        {
+            return "Number is negative";
+        }
+    }
+}

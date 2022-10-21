@@ -1,0 +1,62 @@
+DegreeConversion in Visual Studio – 
+ConversionService.asmx.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Services;
+namespace degreeconversion
+{
+    [WebService(Namespace = "http://tempuri.org/")]
+    [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
+    [System.ComponentModel.ToolboxItem(false)]
+    public class ConversionService : System.Web.Services.WebService
+    {
+        [WebMethod]
+        public double celToFar(double n) { double resFar = (n * 9 / 5) + 32; return (resFar); }
+        [WebMethod]
+        public double farToCel(double n) { double resCel = (n - 32) * 5 / 9; return (resCel); }
+    }
+}
+
+WebForm1.aspx
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="degreeconversion.WebForm1" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"> <head id="Head1" runat="server"> 
+<title></title> </head> <body> <form id="form1" runat="server"> 
+<div> <asp:Label ID="Label1" runat="server" Text="Enter Temperature To Convert "></asp:Label> 
+<asp:TextBox ID="t1" runat="server"></asp:TextBox> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<asp:Button ID="Button1" runat="server" onclick="Button1_Click" Text="Convert to farenheit" />
+<asp:Button ID="Button2" runat="server" onclick="Button2_Click" 
+Text="Convert to celsius" /><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br /> <br /> 
+<asp:Label ID="l1" runat="server"></asp:Label> </div> </form> </body></html> 
+
+WebForm1.aspx.cs
+using System; 
+using System.Collections.Generic; 
+using System.Linq; 
+using System.Web;
+using System.Web.UI; 
+using System.Web.UI.WebControls;
+using System.Web.Services;
+namespace degreeconversion 
+{ public partial class WebForm1 : System.Web.UI.Page 
+{ 
+protected void Page_Load(object sender, EventArgs e) 
+{ 
+} 
+protected void Button1_Click(object sender, EventArgs e) 
+{ 
+    ConversionService obj = new ConversionService (); 
+    double e1 = Convert.ToDouble(t1.Text); 
+    l1.Text="The temperature in farenheit is: "+obj.celToFar(e1).ToString();} 
+    protected void Button2_Click(object sender, EventArgs e) 
+{ 
+        ConversionService obj = new ConversionService ();
+        l1.Text = "The temperature in celsius is: "+obj.farToCel(Convert.ToDouble(t1.Text)).ToString();
+    }
+}
+}
+

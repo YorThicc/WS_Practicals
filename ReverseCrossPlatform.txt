@@ -1,0 +1,73 @@
+Reverse_CrossPlatform
+NewWebService.java
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package pkgReverse;
+import javax.jws.WebService;
+import javax.jws.WebMethod;
+import javax.jws.WebParam;
+/**
+ *
+ * @author admin
+ */
+@WebService(serviceName = "NewWebService")
+public class NewWebService {
+  @WebMethod(operationName = "Reverse")
+public int Reverse(@WebParam(name = "number1") int n1) {
+int rem; int rev=0;
+while(n1>0){
+rem=n1%10; rev=rev*10+rem; n1=n1/10;}
+return rev;}
+}
+WebForm1.aspx
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="Reverse.WebForm1" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+        </div>
+        <asp:Label ID="Label1" runat="server" Text="Enter Number"></asp:Label>
+        <asp:TextBox ID="TextBox1" runat="server" style="margin-left: 10px" Width="397px"></asp:TextBox>
+        <asp:Button ID="Button1" runat="server"  Text="Check" OnClick="btnCheck_Click" />
+        <p>
+        
+            <asp:Label ID="Label2" runat="server" Text="Result"></asp:Label>
+        
+    </form>
+</body>
+</html>
+
+WebForm1.aspx.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace Reverse
+{
+    public partial class WebForm1 : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+        protected void btnCheck_Click(object sender, EventArgs e)
+        {
+            ServiceReference1.NewWebServiceClient obj = new ServiceReference1.NewWebServiceClient();
+            int n1 = Convert.ToInt32(TextBox1.Text); Label2.Text = obj.Reverse(n1).ToString();
+        }
+    }
+}
+
+

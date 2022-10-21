@@ -1,0 +1,41 @@
+TwoWay in Visual Studio –
+EXE – WcfTestClient.exe
+IService1.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.ServiceModel;
+using System.Text;
+namespace TwoWay
+{
+    [ServiceContract]
+    public interface IService1
+    {
+        [OperationContract]
+        int Multiplcation(int a, int b);
+        [OperationContract]
+        int Division(int a, int b);
+    }
+}
+
+Service1.svc.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.ServiceModel;
+using System.Text;
+namespace TwoWay {
+    public class Service1 : IService1 
+    {
+        public int Multiplcation(int a, int b)
+        {
+            return a * b; 
+        } 
+        public int Division(int a, int b) 
+        {return a / b; 
+        }
+    }
+}
+

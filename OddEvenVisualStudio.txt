@@ -1,0 +1,83 @@
+OddEven in Visual Studio –
+Oddeeven.asmx.cs
+using System;
+using System.Collections.Generic;
+using System.Web;
+using System.Web.Services;
+
+namespace WebApplication8
+{    /// <summary>
+    /// Summary description for Oddeeven
+    /// </summary>
+    [WebService(Namespace = "http://tempuri.org/")]
+    [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
+    [System.ComponentModel.ToolboxItem(false)]
+
+    public class Oddeeven : System.Web.Services.WebService
+    {
+        [WebMethod]
+        public string Evenodd1(int n)
+        {
+            if (n % 2 == 0)
+            {
+                return n + " is Even number";
+            }
+            else
+            {
+                return n + " is Odd number";
+            }
+        }
+    }
+}
+
+WebForm1.aspx
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="WebApplication8.WebForm1" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+        
+       <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="check" />
+       <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+        <p>
+            <asp:Label ID="Label1" runat="server" Text="Odd or Even"></asp:Label>
+        </p>
+            </div>
+    </form>
+</body>
+</html>
+
+WebForm1.aspx.cs
+using System;
+using System.Collections.Generic;
+
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace WebApplication8
+{
+    public partial class WebForm1 : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            int a;
+            a = Convert.ToInt32(TextBox1.Text);
+            Oddeeven obj = new Oddeeven();
+            Label1.Text = obj.Evenodd1(a);
+        }
+    }
+}
+
+
