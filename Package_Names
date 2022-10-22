@@ -1,0 +1,21 @@
+FactorialNetBeans -
+Webservice - WSfactorial, package - pkgFactorial
+Webservice Client package- pkgfact
+
+PositiveNegative -
+Webservice package - pkgPosNeg
+Webservice Client package - pkgPosNegWS
+
+Reverse -
+Webservice package - pkgReverse
+
+TempConv -
+Webservice Client package - pkgtemp
+
+Statefull - 
+webservice package - pkgStatefull
+webservice client package - pkgWSrefNn
+
+Stateless -
+webservice package - pkgStatelessWS
+webservice client package - pkgWSRef
